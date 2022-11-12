@@ -42,8 +42,16 @@
 extern "C" {
 #endif
 
+#include "stm32f4xx_hal.h"
+#include "stm32f4xx_hal_gpio.h"
+#include <stdint.h>
+
 #include "pal.h"
 
+typedef struct p_gpio_stm {
+	GPIO_TypeDef* port;
+	uint16_t pin;
+} p_gpio_stm_t;
 
 /**
  * \brief Structure defines the PAL GPIO configuration.
@@ -51,7 +59,7 @@ extern "C" {
 typedef struct pal_gpio
 {
     /// Pointer to GPIO platform specific context/structure
-    void * p_gpio_hw;
+	p_gpio_stm_t * p_gpio_hw;
 
 } pal_gpio_t;
 

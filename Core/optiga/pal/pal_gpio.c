@@ -37,6 +37,8 @@
 
 #include "optiga/pal/pal_gpio.h"
 
+#include "stm32f4xx_hal_gpio.h"
+
 pal_status_t pal_gpio_init(const pal_gpio_t * p_gpio_context)
 {
     if ((p_gpio_context != NULL) && (p_gpio_context->p_gpio_hw != NULL))
@@ -63,6 +65,7 @@ void pal_gpio_set_high(const pal_gpio_t * p_gpio_context)
     {
         // !!!OPTIGA_LIB_PORTING_REQUIRED
         // Your function to set the pin high
+    	HAL_GPIO_WritePin(p_gpio_context->p_gpio_hw->port, p_gpio_context->p_gpio_hw->pin, GPIO_PIN_SET);
     }
 }
 
@@ -72,6 +75,7 @@ void pal_gpio_set_low(const pal_gpio_t * p_gpio_context)
     {
         // !!!OPTIGA_LIB_PORTING_REQUIRED
         // Your function to set the pin low
+    	HAL_GPIO_WritePin(p_gpio_context->p_gpio_hw->port, p_gpio_context->p_gpio_hw->pin, GPIO_PIN_SET);
     }
 }
 

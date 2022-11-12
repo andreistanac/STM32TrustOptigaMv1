@@ -39,6 +39,7 @@
 #include "optiga/pal/pal_i2c.h"
 #include "optiga/ifx_i2c/ifx_i2c_config.h"
 
+#include "main.h"
 // !!!OPTIGA_LIB_PORTING_REQUIRED
 typedef struct locl_i2c_struct_to_descroibe_master
 {
@@ -66,8 +67,9 @@ pal_i2c_t optiga_pal_i2c_context_0 =
 /**
 * \brief PAL vdd pin configuration for OPTIGA. 
  */
-int vdd_pin;
-int reset_pin;
+p_gpio_stm_t vdd_pin 	= {EN_GPIO_Port, EN_Pin};
+p_gpio_stm_t reset_pin 	= {RST_GPIO_Port, RST_Pin};
+
 pal_gpio_t optiga_vdd_0 =
 {
     // !!!OPTIGA_LIB_PORTING_REQUIRED
