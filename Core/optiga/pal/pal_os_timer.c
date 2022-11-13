@@ -38,7 +38,7 @@
 #include "optiga/pal/pal_os_timer.h"
 
 
-static volatile uint32_t g_tick_count = 0;
+volatile uint32_t g_tick_count = 0;
 
 uint32_t pal_os_timer_get_time_in_microseconds(void)
 {

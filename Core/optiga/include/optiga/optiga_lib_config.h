@@ -43,6 +43,7 @@
 extern "C" {
 #endif
 
+#define OPTIGA_TRUST_M_V1
 
 #ifdef OPTIGA_LIB_EXTERNAL
     #include OPTIGA_LIB_EXTERNAL

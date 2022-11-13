@@ -49,13 +49,15 @@ typedef struct locl_i2c_struct_to_descroibe_master
 
 local_i2c_struct_to_descroibe_master_t i2c_master_0;
 
+extern I2C_HandleTypeDef hi2c1;
+
 /**
  * \brief PAL I2C configuration for OPTIGA. 
  */
 pal_i2c_t optiga_pal_i2c_context_0 =
 {
     /// Pointer to I2C master platform specific context
-    (void*)&i2c_master_0,
+    (void*)&hi2c1,
     /// Upper layer context
     NULL,
     /// Callback event handler

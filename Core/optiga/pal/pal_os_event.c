@@ -37,6 +37,15 @@
 
 #include "optiga/pal/pal_os_event.h"
 
+#include "main.h"
+
+#include "stm32f4xx_hal.h"
+
+#include "stm32f4xx_hal_tim.h"
+
+extern TIM_HandleTypeDef htim2;
+extern volatile uint32_t tim2_flag;
+
 static pal_os_event_t pal_os_event_0 = {0};
 
 void pal_os_event_start(pal_os_event_t * p_pal_os_event, register_callback callback, void * callback_args)
@@ -71,6 +80,8 @@ void pal_os_event_trigger_registered_callback(void)
     // IMPORTANT: Make sure you don't call this callback from the ISR. 
     // It could work, but not recommended.
 
+    HAL_TIM_Base_Stop_IT(&htim2);
+
     if (pal_os_event_0.callback_registered)
     {
         callback = pal_os_event_0.callback_registered;
@@ -90,6 +101,12 @@ void pal_os_event_register_callback_oneshot(pal_os_event_t * p_pal_os_event,
     // !!!OPTIGA_LIB_PORTING_REQUIRED
     // User should start the timer here with the 
     // pal_os_event_trigger_registered_callback() function as a callback
+
+    MX_TIM2_Init();
+    __HAL_TIM_SET_AUTORELOAD(&htim2, 50 * time_us);
+    tim2_flag = 0;
+    HAL_TIM_Base_Start_IT(&htim2);
+
 }
 
 void pal_os_event_destroy(pal_os_event_t * pal_os_event)

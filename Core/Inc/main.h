@@ -53,10 +53,12 @@ extern uint32_t tmrx;
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-
+void MX_TIM2_Init(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define DBG_Pin GPIO_PIN_0
+#define DBG_GPIO_Port GPIOA
 #define RST_Pin GPIO_PIN_11
 #define RST_GPIO_Port GPIOE
 #define EN_Pin GPIO_PIN_12

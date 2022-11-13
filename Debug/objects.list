@@ -24,6 +24,7 @@
 "./Core/optiga/pal/pal_os_datastore.o"
 "./Core/optiga/pal/pal_os_event.o"
 "./Core/optiga/pal/pal_os_lock.o"
+"./Core/optiga/pal/pal_os_memory.o"
 "./Core/optiga/pal/pal_os_timer.o"
 "./Core/optiga/util/optiga_util.o"
 "./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o"
@@ -41,3 +42,5 @@
 "./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.o"
 "./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.o"
 "./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.o"
+"./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.o"
+"./Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.o"
