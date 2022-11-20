@@ -75,7 +75,7 @@ void pal_gpio_set_low(const pal_gpio_t * p_gpio_context)
     {
         // !!!OPTIGA_LIB_PORTING_REQUIRED
         // Your function to set the pin low
-    	HAL_GPIO_WritePin(p_gpio_context->p_gpio_hw->port, p_gpio_context->p_gpio_hw->pin, GPIO_PIN_SET);
+    	HAL_GPIO_WritePin(p_gpio_context->p_gpio_hw->port, p_gpio_context->p_gpio_hw->pin, GPIO_PIN_RESET);
     }
 }
 

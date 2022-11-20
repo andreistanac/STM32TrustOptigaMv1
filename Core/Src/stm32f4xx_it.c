@@ -22,6 +22,7 @@
 #include "stm32f4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+void pal_os_event_trigger_registered_callback(void);
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

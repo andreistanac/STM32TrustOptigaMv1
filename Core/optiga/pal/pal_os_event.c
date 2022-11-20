@@ -104,7 +104,6 @@ void pal_os_event_register_callback_oneshot(pal_os_event_t * p_pal_os_event,
 
     MX_TIM2_Init();
     __HAL_TIM_SET_AUTORELOAD(&htim2, 50 * time_us);
-    tim2_flag = 0;
     HAL_TIM_Base_Start_IT(&htim2);
 
 }
