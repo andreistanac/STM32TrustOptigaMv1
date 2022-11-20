@@ -25,6 +25,7 @@
 #include "optiga/pal/pal_os_event.h"
 #include "optiga/pal/pal.h"
 #include "optiga/pal/pal_os_timer.h"
+#include "optiga/optiga_crypt.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -95,6 +96,15 @@ static volatile optiga_lib_status_t optiga_lib_status;
 static void optiga_util_callback(void * context, optiga_lib_status_t return_status)
 {
     optiga_lib_status = return_status;
+}
+
+static void optiga_crypt_callback(void * context, optiga_lib_status_t return_status)
+{
+    optiga_lib_status = return_status;
+    if (NULL != context)
+    {
+        // callback to upper layer here
+    }
 }
 
 /* USER CODE END 0 */
@@ -216,11 +226,16 @@ int main(void)
   HAL_I2C_Master_Receive(&hi2c1, 0x30 << 1, rData, 43, 100);
 #endif
 
+  optiga_crypt_t * me = NULL;
+
+  uint8_t random_data_buffer [32];
+
   uint8_t return_value = 0;
 
   optiga_lib_status_t return_status;
 
   optiga_util_t * me_util;
+
 
   me_util = optiga_util_create(0, optiga_util_callback, NULL);
 
@@ -233,6 +248,28 @@ int main(void)
       //Wait until the optiga_util_open_application is completed
   }
 
+  me = optiga_crypt_create(0, optiga_crypt_callback, NULL);
+  if (NULL == me)
+  {
+      // break;
+  }
+
+  optiga_lib_status = OPTIGA_LIB_BUSY;
+
+  return_status = optiga_crypt_random(me,
+                                      OPTIGA_RNG_TYPE_TRNG,
+                                      random_data_buffer,
+                                      sizeof(random_data_buffer));
+
+  if (OPTIGA_LIB_SUCCESS != return_status)
+  {
+      // break;
+  }
+
+  while (OPTIGA_LIB_BUSY == optiga_lib_status)
+  {
+      //Wait until the optiga_crypt_random operation is completed
+  }
   /* USER CODE END 2 */
 
   /* Infinite loop */
