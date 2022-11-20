@@ -134,7 +134,7 @@ pal_status_t pal_i2c_write(const pal_i2c_t * p_i2c_context, uint8_t * p_data, ui
     //Acquire the I2C bus before read/write
     if (PAL_STATUS_SUCCESS == pal_i2c_acquire(p_i2c_context))
     {
-        // gp_pal_i2c_current_ctx = p_i2c_context;
+        gp_pal_i2c_current_ctx = p_i2c_context;
 
         //Invoke the low level i2c master driver API to write to the bus
         // !!!OPTIGA_LIB_PORTING_REQUIRED
@@ -166,7 +166,7 @@ pal_status_t pal_i2c_write(const pal_i2c_t * p_i2c_context, uint8_t * p_data, ui
             *    invoke_upper_layer_callback(gp_pal_i2c_current_ctx, PAL_I2C_EVENT_SUCCESS);
             *    
             */
-        	// invoke_upper_layer_callback(gp_pal_i2c_current_ctx, PAL_I2C_EVENT_SUCCESS);
+        	invoke_upper_layer_callback(gp_pal_i2c_current_ctx, PAL_I2C_EVENT_SUCCESS);
             status = PAL_STATUS_SUCCESS;
         }
     }
@@ -186,7 +186,7 @@ pal_status_t pal_i2c_read(const pal_i2c_t * p_i2c_context, uint8_t * p_data, uin
     //Acquire the I2C bus before read/write
     if (PAL_STATUS_SUCCESS == pal_i2c_acquire(p_i2c_context))
     {
-        // gp_pal_i2c_current_ctx = p_i2c_context;
+        gp_pal_i2c_current_ctx = p_i2c_context;
 
         //Invoke the low level i2c master driver API to read from the bus
         if (HAL_OK != HAL_I2C_Master_Receive(&hi2c1, 0x30 << 1, p_data, length, 200) )
@@ -206,7 +206,7 @@ pal_status_t pal_i2c_read(const pal_i2c_t * p_i2c_context, uint8_t * p_data, uin
             * invoke_upper_layer_callback(gp_pal_i2c_current_ctx, PAL_I2C_EVENT_SUCCESS);
             * if you have blocking (non-interrupt) i2c calls
             */
-        	// invoke_upper_layer_callback(gp_pal_i2c_current_ctx, PAL_I2C_EVENT_SUCCESS);
+        	invoke_upper_layer_callback(gp_pal_i2c_current_ctx, PAL_I2C_EVENT_SUCCESS);
             status = PAL_STATUS_SUCCESS;
         }
     }
