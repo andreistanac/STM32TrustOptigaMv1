@@ -73,7 +73,7 @@ optiga_lib_status_t return_status;
 
 optiga_util_t * me_util = NULL;
 
-uint8_t _hash_context_buffer [130];
+uint8_t _hash_context_buffer [OPTIGA_HASH_CONTEXT_LENGTH_SHA_256];
 
 optiga_hash_context_t me_hash = {
 
