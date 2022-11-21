@@ -187,7 +187,6 @@ void SysTick_Handler(void)
 	extern volatile uint32_t g_tick_count;
 	g_tick_count++;
 
-	tmrx++;
   /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();
   /* USER CODE BEGIN SysTick_IRQn 1 */
@@ -208,7 +207,7 @@ void SysTick_Handler(void)
 void TIM2_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM2_IRQn 0 */
-	extern volatile uint32_t tim2_flag;
+	static volatile uint32_t tim2_flag;
 	tim2_flag++;
   /* USER CODE END TIM2_IRQn 0 */
   HAL_TIM_IRQHandler(&htim2);

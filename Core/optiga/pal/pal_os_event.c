@@ -44,7 +44,6 @@
 #include "stm32f4xx_hal_tim.h"
 
 extern TIM_HandleTypeDef htim2;
-extern volatile uint32_t tim2_flag;
 
 static pal_os_event_t pal_os_event_0 = {0};
 

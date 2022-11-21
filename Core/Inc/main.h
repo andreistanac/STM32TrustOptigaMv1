@@ -31,7 +31,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-extern uint32_t tmrx;
+
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

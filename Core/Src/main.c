@@ -62,34 +62,16 @@ static void MX_I2C1_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-unsigned char wDataStatus[] = {
-		0x82
-};
 
-unsigned char wDataData[] = {
-		0x80
-};
+optiga_crypt_t * me_crypt = NULL;
 
-unsigned char wDataOpenApp[] = {
-		0x80, 0x03, 0x00, 0x15, 0x00, 0x70, 0x00, 0x00,
-		0x10, 0xD2, 0x76, 0x00, 0x00, 0x04, 0x47, 0x65,
-		0x6E, 0x41, 0x75, 0x74, 0x68, 0x41, 0x70, 0x70,
-		0x6C, 0x04, 0x1A
-};
+uint8_t random_data_buffer [32];
 
-unsigned char wDataRandom[] = {
-		0x80, 0x03, 0x00, 0x08, 0x08, 0x20, 0x8C, 0x00,
-		0x00, 0x02, 0x00, 0x20, 0x6F, 0xAA
-};
+uint8_t return_value = 0;
 
-unsigned char wDataAck[] = {
-		0x80, 0x80, 0x00, 0x00, 0x0C, 0xEC
-};
+optiga_lib_status_t return_status;
 
-unsigned char rData[128];
-
-volatile uint32_t tim2_flag = 0;
-uint32_t tmrx = 0;
+optiga_util_t * me_util;
 
 static volatile optiga_lib_status_t optiga_lib_status;
 
@@ -141,102 +123,6 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
-#if 0
-  HAL_GPIO_WritePin(RST_GPIO_Port, RST_Pin, GPIO_PIN_RESET);
-  // TBD 2 ms
-  tmrx = 0;
-  while (tmrx < 2);
-  HAL_GPIO_WritePin(RST_GPIO_Port, RST_Pin, GPIO_PIN_SET);
-  // TBD 17 ms
-  tmrx = 0;
-  while (tmrx < 17);
-
-  HAL_I2C_Master_Transmit(&hi2c1, 0x30 << 1, wDataStatus, 1, 100);
-  tmrx = 0;
-  while (tmrx < 2);
-  HAL_I2C_Master_Receive(&hi2c1, 0x30 << 1, rData, 4, 100);
-
-  tmrx = 0;
-  while (tmrx < 2);
-  HAL_I2C_Master_Transmit(&hi2c1, 0x30 << 1, wDataOpenApp, 27, 100);
-
-  do {
-	  tmrx = 0;
-	  while (tmrx < 2);
-	  HAL_I2C_Master_Transmit(&hi2c1, 0x30 << 1, wDataStatus, 1, 100);
-	  tmrx = 0;
-	  while (tmrx < 2);
-	  rData[0] = 0xFF;
-	  HAL_I2C_Master_Receive(&hi2c1, 0x30 << 1, rData, 4, 100);
-  } while (rData[0] == 0xFF);
-
-  tmrx = 0;
-  while (tmrx < 2);
-  HAL_I2C_Master_Transmit(&hi2c1, 0x30 << 1, wDataData, 1, 100);
-
-  tmrx = 0;
-  while (tmrx < 2);
-  rData[0] = 0xFF;
-  HAL_I2C_Master_Receive(&hi2c1, 0x30 << 1, rData, 5, 100);
-
-  do {
-	  tmrx = 0;
-	  while (tmrx < 2);
-	  HAL_I2C_Master_Transmit(&hi2c1, 0x30 << 1, wDataStatus, 1, 100);
-	  tmrx = 0;
-	  while (tmrx < 2);
-	  rData[0] = 0xFF;
-	  HAL_I2C_Master_Receive(&hi2c1, 0x30 << 1, rData, 4, 100);
-  } while (rData[0] == 0xFF);
-
-  tmrx = 0;
-  while (tmrx < 2);
-  HAL_I2C_Master_Transmit(&hi2c1, 0x30 << 1, wDataData, 1, 100);
-
-  tmrx = 0;
-  while (tmrx < 2);
-  rData[0] = 0xFF;
-  HAL_I2C_Master_Receive(&hi2c1, 0x30 << 1, rData, 10, 100);
-
-  tmrx = 0;
-  while (tmrx < 2);
-  HAL_I2C_Master_Transmit(&hi2c1, 0x30 << 1, wDataAck, 6, 100);
-
-  tmrx = 0;
-  while (tmrx < 2);
-  HAL_I2C_Master_Transmit(&hi2c1, 0x30 << 1, wDataRandom, 14, 100);
-
-  do {
-	  tmrx = 0;
-	  while (tmrx < 2);
-	  HAL_I2C_Master_Transmit(&hi2c1, 0x30 << 1, wDataStatus, 1, 100);
-	  tmrx = 0;
-	  while (tmrx < 2);
-	  rData[0] = 0xFF;
-	  HAL_I2C_Master_Receive(&hi2c1, 0x30 << 1, rData, 4, 100);
-  } while (rData[0] == 0xFF);
-
-  tmrx = 0;
-  while (tmrx < 2);
-  HAL_I2C_Master_Transmit(&hi2c1, 0x30 << 1, wDataData, 1, 100);
-
-  tmrx = 0;
-  while (tmrx < 2);
-  rData[0] = 0xFF;
-  HAL_I2C_Master_Receive(&hi2c1, 0x30 << 1, rData, 43, 100);
-#endif
-
-  optiga_crypt_t * me = NULL;
-
-  uint8_t random_data_buffer [32];
-
-  uint8_t return_value = 0;
-
-  optiga_lib_status_t return_status;
-
-  optiga_util_t * me_util;
-
-
   me_util = optiga_util_create(0, optiga_util_callback, NULL);
 
   optiga_lib_status = OPTIGA_LIB_BUSY;
@@ -248,15 +134,15 @@ int main(void)
       //Wait until the optiga_util_open_application is completed
   }
 
-  me = optiga_crypt_create(0, optiga_crypt_callback, NULL);
-  if (NULL == me)
+  me_crypt = optiga_crypt_create(0, optiga_crypt_callback, NULL);
+  if (NULL == me_crypt)
   {
       // break;
   }
 
   optiga_lib_status = OPTIGA_LIB_BUSY;
 
-  return_status = optiga_crypt_random(me,
+  return_status = optiga_crypt_random(me_crypt,
                                       OPTIGA_RNG_TYPE_TRNG,
                                       random_data_buffer,
                                       sizeof(random_data_buffer));
@@ -270,6 +156,7 @@ int main(void)
   {
       //Wait until the optiga_crypt_random operation is completed
   }
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
