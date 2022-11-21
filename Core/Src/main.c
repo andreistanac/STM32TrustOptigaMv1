@@ -71,7 +71,27 @@ uint8_t return_value = 0;
 
 optiga_lib_status_t return_status;
 
-optiga_util_t * me_util;
+optiga_util_t * me_util = NULL;
+
+uint8_t _hash_context_buffer [130];
+
+optiga_hash_context_t me_hash = {
+
+		.context_buffer = _hash_context_buffer,
+
+	    .context_buffer_length = sizeof(_hash_context_buffer),
+
+	    .hash_algo = (uint8_t)OPTIGA_HASH_TYPE_SHA_256
+};
+
+uint8_t _v[] = { 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01};
+
+hash_data_from_host_t hash_input = {
+		.buffer = _v,
+		.length = sizeof(_v)
+};
+
+uint8_t hash_output[32];
 
 static volatile optiga_lib_status_t optiga_lib_status;
 
@@ -146,6 +166,48 @@ int main(void)
                                       OPTIGA_RNG_TYPE_TRNG,
                                       random_data_buffer,
                                       sizeof(random_data_buffer));
+
+  if (OPTIGA_LIB_SUCCESS != return_status)
+  {
+      // break;
+  }
+
+  while (OPTIGA_LIB_BUSY == optiga_lib_status)
+  {
+      //Wait until the optiga_crypt_random operation is completed
+  }
+
+  optiga_lib_status = OPTIGA_LIB_BUSY;
+
+  return_status = optiga_crypt_hash_start(me_crypt, &me_hash);
+
+  if (OPTIGA_LIB_SUCCESS != return_status)
+  {
+      // break;
+  }
+
+  while (OPTIGA_LIB_BUSY == optiga_lib_status)
+  {
+      //Wait until the optiga_crypt_random operation is completed
+  }
+
+  optiga_lib_status = OPTIGA_LIB_BUSY;
+
+  optiga_crypt_hash_update(me_crypt, &me_hash, OPTIGA_CRYPT_HOST_DATA, &hash_input);
+
+  if (OPTIGA_LIB_SUCCESS != return_status)
+  {
+      // break;
+  }
+
+  while (OPTIGA_LIB_BUSY == optiga_lib_status)
+  {
+      //Wait until the optiga_crypt_random operation is completed
+  }
+
+  optiga_lib_status = OPTIGA_LIB_BUSY;
+
+  return_status = optiga_crypt_hash_finalize(me_crypt, &me_hash, hash_output);
 
   if (OPTIGA_LIB_SUCCESS != return_status)
   {
