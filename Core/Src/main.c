@@ -95,6 +95,25 @@ uint8_t hash_output[32];
 
 static volatile optiga_lib_status_t optiga_lib_status;
 
+optiga_key_id_t optiga_key_id;
+uint32_t time_taken = 0;
+uint16_t optiga_oid;
+
+optiga_rsa_encryption_scheme_t encryption_scheme;
+uint8_t encrypted_message[128];
+uint16_t encrypted_message_length = sizeof(encrypted_message);
+
+uint8_t decrypted_message[150];
+uint16_t decrypted_message_length = sizeof(decrypted_message);
+
+public_key_from_host_t public_key_from_host;
+
+const uint8_t message[] = {"Hardware Security"};
+
+uint8_t public_key [150];
+uint16_t public_key_length = sizeof(public_key);
+const uint8_t E0FC_metadata[] = { 0x20, 0x06, 0xD0, 0x01, 0x00, 0xD3, 0x01, 0x00 };
+
 static void optiga_util_callback(void * context, optiga_lib_status_t return_status)
 {
     optiga_lib_status = return_status;
@@ -208,6 +227,92 @@ int main(void)
   optiga_lib_status = OPTIGA_LIB_BUSY;
 
   return_status = optiga_crypt_hash_finalize(me_crypt, &me_hash, hash_output);
+
+  if (OPTIGA_LIB_SUCCESS != return_status)
+  {
+      // break;
+  }
+
+  while (OPTIGA_LIB_BUSY == optiga_lib_status)
+  {
+      //Wait until the optiga_crypt_random operation is completed
+  }
+
+  optiga_lib_status = OPTIGA_LIB_BUSY;
+  optiga_oid = 0xE0FC;
+  return_status = optiga_util_write_metadata(me_util,
+                                             optiga_oid,
+                                             E0FC_metadata,
+                                             sizeof(E0FC_metadata));
+  if (OPTIGA_LIB_SUCCESS != return_status)
+  {
+      // break;
+  }
+
+  while (OPTIGA_LIB_BUSY == optiga_lib_status)
+  {
+      //Wait until the optiga_crypt_random operation is completed
+  }
+
+
+  optiga_lib_status = OPTIGA_LIB_BUSY;
+  optiga_key_id = OPTIGA_KEY_ID_E0FC;
+
+  return_status = optiga_crypt_rsa_generate_keypair(me_crypt,
+                                                            OPTIGA_RSA_KEY_1024_BIT_EXPONENTIAL,
+                                                            (uint8_t)OPTIGA_KEY_USAGE_ENCRYPTION,
+                                                            FALSE,
+                                                            &optiga_key_id,
+                                                            public_key,
+                                                            &public_key_length);
+
+  if (OPTIGA_LIB_SUCCESS != return_status)
+  {
+      // break;
+  }
+
+  while (OPTIGA_LIB_BUSY == optiga_lib_status)
+  {
+      //Wait until the optiga_crypt_random operation is completed
+  }
+
+  encryption_scheme = OPTIGA_RSAES_PKCS1_V15;
+  public_key_from_host.public_key = public_key;
+  public_key_from_host.length = public_key_length;
+  public_key_from_host.key_type = (uint8_t)OPTIGA_RSA_KEY_1024_BIT_EXPONENTIAL;
+  optiga_lib_status = OPTIGA_LIB_BUSY;
+
+  return_status = optiga_crypt_rsa_encrypt_message(me_crypt,
+                                                      encryption_scheme,
+                                                      message,
+                                                      sizeof(message),
+                                                      NULL,
+                                                      0,
+                                                      OPTIGA_CRYPT_HOST_DATA,
+                                                      &public_key_from_host,
+                                                      encrypted_message,
+                                                      &encrypted_message_length);
+  if (OPTIGA_LIB_SUCCESS != return_status)
+  {
+      // break;
+  }
+
+  while (OPTIGA_LIB_BUSY == optiga_lib_status)
+  {
+      //Wait until the optiga_crypt_random operation is completed
+  }
+
+  optiga_lib_status = OPTIGA_LIB_BUSY;
+
+  return_status = optiga_crypt_rsa_decrypt_and_export(me_crypt,
+                                                      encryption_scheme,
+                                                      encrypted_message,
+                                                      sizeof(encrypted_message),
+                                                      NULL,
+                                                      0,
+                                                      optiga_key_id,
+                                                      decrypted_message,
+                                                      &decrypted_message_length);
 
   if (OPTIGA_LIB_SUCCESS != return_status)
   {
