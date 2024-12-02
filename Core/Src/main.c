@@ -114,6 +114,23 @@ uint8_t public_key [150];
 uint16_t public_key_length = sizeof(public_key);
 const uint8_t E0FC_metadata[] = { 0x20, 0x06, 0xD0, 0x01, 0x00, 0xD3, 0x01, 0x00 };
 
+struct _L6_data {
+	uint8_t msg0[256];
+	uint8_t msg1[256];
+	uint8_t msg2[256];
+	uint8_t msg3[256];
+
+	uint8_t sig_sig[32];
+
+	uint8_t msg0_sig[32];
+	uint8_t msg1_sig[32];
+	uint8_t msg2_sig[32];
+	uint8_t msg3_sig[32];
+
+	uint8_t	RSA_enc[2048];
+	uint8_t	RSA_dec[2048];
+} L6_data;
+
 static void optiga_util_callback(void * context, optiga_lib_status_t return_status)
 {
     optiga_lib_status = return_status;
@@ -179,63 +196,82 @@ int main(void)
       // break;
   }
 
+  hash_data_from_host_t to_hash;
+
+  to_hash.buffer = (uint8_t*)&L6_data.msg0;
+  to_hash.length = 256;
+
+  uint8_t (*hash_out)[32] = &L6_data.msg0_sig;
+
+  uint8_t (*rnd_buff)[256] = &L6_data.msg0;
+
+  uint8_t rep = 4;
+
+  while(rep--) {
+
+	  optiga_lib_status = OPTIGA_LIB_BUSY;
+
+	  return_status = optiga_crypt_random(me_crypt,
+	                                      OPTIGA_RNG_TYPE_TRNG,
+										  rnd_buff,
+	                                      256);
+
+	  if (OPTIGA_LIB_SUCCESS != return_status)
+	  {
+	      // break;
+	  }
+
+	  while (OPTIGA_LIB_BUSY == optiga_lib_status)
+	  {
+	      //Wait until the optiga_crypt_random operation is completed
+	  }
+
+	  optiga_lib_status = OPTIGA_LIB_BUSY;
+
+	  return_status = optiga_crypt_hash  ( me_crypt,
+		  OPTIGA_HASH_TYPE_SHA_256,
+		  OPTIGA_CRYPT_HOST_DATA,
+		  &to_hash,
+		  hash_out
+		 );
+
+	  if (OPTIGA_LIB_SUCCESS != return_status)
+	  {
+		  // break;
+	  }
+
+	  while (OPTIGA_LIB_BUSY == optiga_lib_status)
+	  {
+		  //Wait until the optiga_crypt_random operation is completed
+	  }
+
+	  rnd_buff++;
+	  to_hash.buffer += 256;
+	  hash_out++;
+  }
+
+  to_hash.buffer = (uint8_t*)&L6_data;
+  to_hash.length = 256 * 4 + 32;
+
+  hash_out = &L6_data.sig_sig;
+
   optiga_lib_status = OPTIGA_LIB_BUSY;
 
-  return_status = optiga_crypt_random(me_crypt,
-                                      OPTIGA_RNG_TYPE_TRNG,
-                                      random_data_buffer,
-                                      sizeof(random_data_buffer));
+  return_status = optiga_crypt_hash  ( me_crypt,
+	  OPTIGA_HASH_TYPE_SHA_256,
+	  OPTIGA_CRYPT_HOST_DATA,
+	  &to_hash,
+	  hash_out
+	 );
 
   if (OPTIGA_LIB_SUCCESS != return_status)
   {
-      // break;
+	  // break;
   }
 
   while (OPTIGA_LIB_BUSY == optiga_lib_status)
   {
-      //Wait until the optiga_crypt_random operation is completed
-  }
-
-  optiga_lib_status = OPTIGA_LIB_BUSY;
-
-  return_status = optiga_crypt_hash_start(me_crypt, &me_hash);
-
-  if (OPTIGA_LIB_SUCCESS != return_status)
-  {
-      // break;
-  }
-
-  while (OPTIGA_LIB_BUSY == optiga_lib_status)
-  {
-      //Wait until the optiga_crypt_random operation is completed
-  }
-
-  optiga_lib_status = OPTIGA_LIB_BUSY;
-
-  optiga_crypt_hash_update(me_crypt, &me_hash, OPTIGA_CRYPT_HOST_DATA, &hash_input);
-
-  if (OPTIGA_LIB_SUCCESS != return_status)
-  {
-      // break;
-  }
-
-  while (OPTIGA_LIB_BUSY == optiga_lib_status)
-  {
-      //Wait until the optiga_crypt_random operation is completed
-  }
-
-  optiga_lib_status = OPTIGA_LIB_BUSY;
-
-  return_status = optiga_crypt_hash_finalize(me_crypt, &me_hash, hash_output);
-
-  if (OPTIGA_LIB_SUCCESS != return_status)
-  {
-      // break;
-  }
-
-  while (OPTIGA_LIB_BUSY == optiga_lib_status)
-  {
-      //Wait until the optiga_crypt_random operation is completed
+	  //Wait until the optiga_crypt_random operation is completed
   }
 
   optiga_lib_status = OPTIGA_LIB_BUSY;
@@ -280,48 +316,76 @@ int main(void)
   public_key_from_host.public_key = public_key;
   public_key_from_host.length = public_key_length;
   public_key_from_host.key_type = (uint8_t)OPTIGA_RSA_KEY_1024_BIT_EXPONENTIAL;
-  optiga_lib_status = OPTIGA_LIB_BUSY;
 
-  return_status = optiga_crypt_rsa_encrypt_message(me_crypt,
-                                                      encryption_scheme,
-                                                      message,
-                                                      sizeof(message),
-                                                      NULL,
-                                                      0,
-                                                      OPTIGA_CRYPT_HOST_DATA,
-                                                      &public_key_from_host,
-                                                      encrypted_message,
-                                                      &encrypted_message_length);
-  if (OPTIGA_LIB_SUCCESS != return_status)
-  {
-      // break;
+  uint8_t * data_to_enc = &L6_data;
+  uint32_t enc_len = 1056;
+  const uint32_t enc_qnt = 100;
+
+  uint8_t * enc_data = &L6_data.RSA_enc;
+
+  rep = 11;
+
+  while (rep--) {
+	  optiga_lib_status = OPTIGA_LIB_BUSY;
+
+	  return_status = optiga_crypt_rsa_encrypt_message(me_crypt,
+														  encryption_scheme,
+														  data_to_enc,
+														  (enc_len>enc_qnt)?enc_qnt:enc_len,
+														  NULL,
+														  0,
+														  OPTIGA_CRYPT_HOST_DATA,
+														  &public_key_from_host,
+														  enc_data,
+														  &encrypted_message_length);
+	  if (OPTIGA_LIB_SUCCESS != return_status)
+	  {
+		  // break;
+	  }
+
+	  while (OPTIGA_LIB_BUSY == optiga_lib_status)
+	  {
+		  //Wait until the optiga_crypt_random operation is completed
+	  }
+	  enc_len -= enc_qnt;
+	  data_to_enc += enc_qnt;
+	  enc_data += 128;
   }
 
-  while (OPTIGA_LIB_BUSY == optiga_lib_status)
-  {
-      //Wait until the optiga_crypt_random operation is completed
-  }
+  uint8_t * dec_data = &L6_data.RSA_dec;
+  uint32_t dec_qnt = 100;
 
-  optiga_lib_status = OPTIGA_LIB_BUSY;
+  uint32_t dec_len;
 
-  return_status = optiga_crypt_rsa_decrypt_and_export(me_crypt,
-                                                      encryption_scheme,
-                                                      encrypted_message,
-                                                      sizeof(encrypted_message),
-                                                      NULL,
-                                                      0,
-                                                      optiga_key_id,
-                                                      decrypted_message,
-                                                      &decrypted_message_length);
+  enc_data = &L6_data.RSA_enc;
 
-  if (OPTIGA_LIB_SUCCESS != return_status)
-  {
-      // break;
-  }
+  rep = 11;
 
-  while (OPTIGA_LIB_BUSY == optiga_lib_status)
-  {
-      //Wait until the optiga_crypt_random operation is completed
+  while (rep--) {
+	  optiga_lib_status = OPTIGA_LIB_BUSY;
+
+	  return_status = optiga_crypt_rsa_decrypt_and_export(me_crypt,
+														  encryption_scheme,
+														  enc_data,
+														  128,
+														  NULL,
+														  0,
+														  optiga_key_id,
+														  dec_data,
+														  &dec_len);
+
+	  if (OPTIGA_LIB_SUCCESS != return_status)
+	  {
+		  // break;
+	  }
+
+	  while (OPTIGA_LIB_BUSY == optiga_lib_status)
+	  {
+		  //Wait until the optiga_crypt_random operation is completed
+	  }
+
+	  dec_data += enc_qnt;
+	  enc_data += 128;
   }
 
   /* USER CODE END 2 */
