@@ -388,6 +388,55 @@ int main(void)
 	  enc_data += 128;
   }
 
+  optiga_lib_status = OPTIGA_LIB_BUSY;
+  uint8_t * digest = &L6_data.sig_sig;
+  uint8_t signature[128];
+  uint16_t signature_length = sizeof(signature);
+
+  return_status = optiga_crypt_rsa_sign	(	me_crypt,
+		  OPTIGA_RSASSA_PKCS1_V15_SHA256,
+		  digest,
+		  32,
+		  OPTIGA_KEY_ID_E0FC,
+		  signature,
+		  &signature_length,
+		  0x0000
+  );
+
+  if (OPTIGA_LIB_SUCCESS != return_status)
+  {
+	  // break;
+  }
+
+  while (OPTIGA_LIB_BUSY == optiga_lib_status)
+  {
+	  //Wait until the optiga_crypt_random operation is completed
+  }
+
+  optiga_lib_status = OPTIGA_LIB_BUSY;
+
+  // digest[0] = 123; // Try this to trigger Signature verification failure
+
+  return_status = optiga_crypt_rsa_verify (me_crypt,
+                                           OPTIGA_RSASSA_PKCS1_V15_SHA256,
+                                           digest,
+                                           32,
+                                           signature,
+                                           sizeof(signature),
+                                           OPTIGA_CRYPT_HOST_DATA,
+                                           &public_key_from_host,
+                                           0x0000);
+
+  if (OPTIGA_LIB_SUCCESS != return_status)
+  {
+	  // break;
+  }
+
+  while (OPTIGA_LIB_BUSY == optiga_lib_status)
+  {
+	  //Wait until the optiga_crypt_random operation is completed
+  }
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
