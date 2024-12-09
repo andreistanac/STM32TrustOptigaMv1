@@ -28,18 +28,18 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_util.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/cmd/optiga_cmd.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_common.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_lib_config.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_lib_config_m_v1.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_types.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_return_codes.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_event.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_timer.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_crypt.h
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_util.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/cmd/optiga_cmd.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_common.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_lib_config.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_lib_config_m_v1.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_types.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_return_codes.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_event.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_timer.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_crypt.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -70,15 +70,15 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_util.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/cmd/optiga_cmd.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_common.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_lib_config.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_lib_config_m_v1.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_types.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_return_codes.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_event.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_timer.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_crypt.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_util.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/cmd/optiga_cmd.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_common.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_lib_config.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_lib_config_m_v1.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_types.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_return_codes.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_event.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_timer.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_crypt.h:

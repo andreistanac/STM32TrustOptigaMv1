@@ -1,17 +1,17 @@
 Core/optiga/comms/optiga_comms_ifx_i2c.o: \
  ../Core/optiga/comms/optiga_comms_ifx_i2c.c \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/comms/optiga_comms.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_types.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_return_codes.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_common.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_lib_config.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_lib_config_m_v1.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_logger.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/ifx_i2c/ifx_i2c.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/ifx_i2c/ifx_i2c_config.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_i2c.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_gpio.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/comms/optiga_comms.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_types.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_return_codes.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_common.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_lib_config.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_lib_config_m_v1.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_logger.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/ifx_i2c/ifx_i2c.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/ifx_i2c/ifx_i2c_config.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_i2c.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_gpio.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -41,22 +41,22 @@ Core/optiga/comms/optiga_comms_ifx_i2c.o: \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_timer.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_datastore.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal.h \
- C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_event.h
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/comms/optiga_comms.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_types.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_return_codes.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_common.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_lib_config.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_lib_config_m_v1.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_logger.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/ifx_i2c/ifx_i2c.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/ifx_i2c/ifx_i2c_config.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_i2c.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_gpio.h:
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_timer.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_datastore.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal.h \
+ C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_event.h
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/comms/optiga_comms.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_types.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_return_codes.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_common.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_lib_config.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/optiga_lib_config_m_v1.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/common/optiga_lib_logger.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/ifx_i2c/ifx_i2c.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/ifx_i2c/ifx_i2c_config.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_i2c.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_gpio.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:
@@ -86,7 +86,7 @@ C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_timer.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_datastore.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal.h:
-C:/Users/student/Projects/L6a/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_event.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_timer.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_datastore.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal.h:
+C:/Users/worker/Projects/STM32TrustOptigaMv1/Core/optiga/include/optiga/pal/pal_os_event.h:

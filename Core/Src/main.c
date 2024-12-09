@@ -296,7 +296,7 @@ int main(void)
 
   return_status = optiga_crypt_rsa_generate_keypair(me_crypt,
                                                             OPTIGA_RSA_KEY_1024_BIT_EXPONENTIAL,
-                                                            (uint8_t)OPTIGA_KEY_USAGE_ENCRYPTION,
+                                                            (uint8_t)(OPTIGA_KEY_USAGE_ENCRYPTION | OPTIGA_KEY_USAGE_SIGN),
                                                             FALSE,
                                                             &optiga_key_id,
                                                             public_key,
@@ -355,7 +355,7 @@ int main(void)
   uint8_t * dec_data = &L6_data.RSA_dec;
   uint32_t dec_qnt = 100;
 
-  uint32_t dec_len;
+  uint32_t dec_len = 100;
 
   enc_data = &L6_data.RSA_enc;
 
@@ -384,7 +384,7 @@ int main(void)
 		  //Wait until the optiga_crypt_random operation is completed
 	  }
 
-	  dec_data += enc_qnt;
+	  dec_data += dec_qnt;
 	  enc_data += 128;
   }
 
